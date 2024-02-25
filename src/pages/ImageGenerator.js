@@ -128,8 +128,11 @@ function ImageGenerator() {
     // };
     // setQueue((prevQueue) => [...prevQueue, newRequest]);
     try {
-      const response = await sendMessageToOpenAI();
+      let response = await sendMessageToOpenAI();
       // Process the response as needed
+      response = response.map((promptObject) => {
+        return { ...promptObject, imageNumber: 2 };
+      });
       setQueue((prevQueue) => [...prevQueue, ...response]);
     } catch (error) {
       console.error("Error processing OpenAI request:", error);
