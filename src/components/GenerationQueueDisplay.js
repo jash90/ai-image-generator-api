@@ -8,8 +8,9 @@ function GenerationQueueDisplay({ queue }) {
       <ul>
         {queue.map((request, index) => (
           <li key={index}>
-            Prompt: {request.prompt}, Images: {request.imageNumber}, Aspect
-            Ratio: {request.aspectRatio}
+            {`Prompt: ${request.prompt}, Images: ${request.imageNumber}, Aspect
+            Ratio: ${request.aspectRatio}
+            Performance: ${request.performanceSelection}`}
           </li>
         ))}
       </ul>
@@ -23,6 +24,7 @@ GenerationQueueDisplay.propTypes = {
       prompt: PropTypes.string.isRequired,
       imageNumber: PropTypes.number.isRequired,
       aspectRatio: PropTypes.string.isRequired,
+      performanceSelection: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };

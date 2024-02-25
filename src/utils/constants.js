@@ -1,3 +1,5 @@
+// src/utils/constants.js
+
 export const ADVANCED_PARAMS = {
   adaptive_cfg: 7,
   adm_scaler_end: 0.3,
@@ -33,3 +35,17 @@ export const ADVANCED_PARAMS = {
   scheduler_name: "karras",
   skipping_cn_preprocessor: false,
 };
+
+export const SYSTEM_MESSAGE_CONTENT = (
+  imageNumber = 1,
+  aspectRatio = "1920*1920",
+  performanceSelection = "Extreme Speed",
+) =>
+  `Based on the prompt, prepare an array containing the prompt for generating images, the number of images (imageNumber), aspectRatio, and performanceSelection. The array should be in only array objects JSON without format. If the user does not provide an aspect ratio, performanceSelection, or the number of images, set aspectRatio to ${aspectRatio}, performanceSelection to ${performanceSelection}, and imageNumber to ${imageNumber}. Please ensure prompts are as detailed and accurate as possible.`;
+export const USER_MESSAGE_CONTENT = (
+  inputText,
+  imageNumber = 1,
+  aspectRatio = "1920*1920",
+  performanceSelection = "Extreme Speed",
+) =>
+  `${inputText}. If I did not specify the number of images, aspect ratio, and performance selection, use these: imageNumber = ${imageNumber}, aspectRatio = ${aspectRatio}, performanceSelection = ${performanceSelection}.`;

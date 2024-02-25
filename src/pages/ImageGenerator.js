@@ -7,6 +7,11 @@ import JobQueueDisplay from "../components/JobQueueDisplay";
 import ImageList from "../components/ImageList";
 import GenerationQueueDisplay from "../components/GenerationQueueDisplay";
 import localApi from "../utils/localApi";
+import openAiApi from "../utils/openAiApi";
+import {
+  SYSTEM_MESSAGE_CONTENT,
+  USER_MESSAGE_CONTENT,
+} from "../utils/constants";
 
 function ImageGenerator() {
   const [inputText, setInputText] = useState("");
@@ -43,8 +48,8 @@ function ImageGenerator() {
           prompt: currentRequest.prompt,
           negative_prompt: "",
           style_selections: ["Fooocus V2", "Fooocus Enhance", "Fooocus Sharp"],
-          performance_selection: performanceSelection,
-          aspect_ratios_selection: aspectRatio,
+          performance_selection: currentRequest.performanceSelection,
+          aspect_ratios_selection: currentRequest.aspectRatio,
           image_number: currentRequest.imageNumber,
           image_seed: -1,
           sharpness: 2,
@@ -85,14 +90,48 @@ function ImageGenerator() {
     processQueue();
   }, [queue, isProcessing, performanceSelection, aspectRatio]);
 
+  async function sendMessageToOpenAI() {
+    try {
+      const response = await openAiApi.post("chat/completions", {
+        model: "gpt-4-turbo-preview",
+        messages: [
+          {
+            role: "system",
+            content: SYSTEM_MESSAGE_CONTENT(),
+          },
+          {
+            role: "user",
+            content: USER_MESSAGE_CONTENT(
+              inputText,
+              aspectRatio,
+              performanceSelection,
+            ),
+          },
+        ],
+      });
+
+      return JSON.parse(response.data.choices[0].message.content);
+    } catch (error) {
+      console.error("Error sending message to OpenAI:", error);
+      throw error;
+    }
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newRequest = {
-      prompt: inputText,
-      imageNumber,
-      aspectRatio, // Confirm this matches the expected "aspectRatio" state format
-    };
-    setQueue((prevQueue) => [...prevQueue, newRequest]);
+    // const newRequest = {
+    //   prompt: inputText,
+    //   imageNumber,
+    //   aspectRatio, // Confirm this matches the expected "aspectRatio" state format
+    // };
+    // setQueue((prevQueue) => [...prevQueue, newRequest]);
+    try {
+      const response = await sendMessageToOpenAI();
+      // Process the response as needed
+      setQueue((prevQueue) => [...prevQueue, ...response]);
+    } catch (error) {
+      console.error("Error processing OpenAI request:", error);
+    }
   };
 
   return (
