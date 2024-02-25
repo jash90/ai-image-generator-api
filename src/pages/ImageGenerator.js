@@ -12,6 +12,7 @@ import {
   SYSTEM_MESSAGE_CONTENT,
   USER_MESSAGE_CONTENT,
 } from "../utils/constants";
+import ModelSelector from "../components/ModelSelector";
 
 function ImageGenerator() {
   const [inputText, setInputText] = useState("");
@@ -21,6 +22,7 @@ function ImageGenerator() {
   });
   const [performanceSelection, setPerformanceSelection] =
     useState("Extreme Speed");
+  const [model, setModel] = useState("gpt-3.5-turbo");
   const [aspectRatio, setAspectRatio] = useState("1920*1080");
   const [imageNumber, setImageNumber] = useState(1);
   const [queue, setQueue] = useState(() => {
@@ -93,11 +95,11 @@ function ImageGenerator() {
   async function sendMessageToOpenAI() {
     try {
       const response = await openAiApi.post("chat/completions", {
-        model: "gpt-4-turbo-preview",
+        model,
         messages: [
           {
             role: "system",
-            content: SYSTEM_MESSAGE_CONTENT(),
+            content: SYSTEM_MESSAGE_CONTENT,
           },
           {
             role: "user",
@@ -110,10 +112,10 @@ function ImageGenerator() {
         ],
       });
 
+      console.log(response);
       return JSON.parse(response.data.choices[0].message.content);
     } catch (error) {
       console.error("Error sending message to OpenAI:", error);
-      throw error;
     }
   }
 
@@ -160,6 +162,7 @@ function ImageGenerator() {
         performanceSelection={performanceSelection}
         setPerformanceSelection={setPerformanceSelection}
       />
+      <ModelSelector model={model} setModel={setModel} />
       <AspectRatioSelector
         aspectRatio={aspectRatio}
         setAspectRatio={setAspectRatio}

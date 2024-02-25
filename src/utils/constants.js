@@ -36,12 +36,7 @@ export const ADVANCED_PARAMS = {
   skipping_cn_preprocessor: false,
 };
 
-export const SYSTEM_MESSAGE_CONTENT = (
-  imageNumber = 1,
-  aspectRatio = "1920*1920",
-  performanceSelection = "Extreme Speed",
-) =>
-  `Based on the prompt, prepare an array containing the prompt for generating images, the number of images (imageNumber), aspectRatio, and performanceSelection. The array should be in only array objects JSON without format. If the user does not provide an aspect ratio, performanceSelection, or the number of images, set aspectRatio to ${aspectRatio}, performanceSelection to ${performanceSelection}, and imageNumber to ${imageNumber}. Please ensure prompts are as detailed and accurate as possible.`;
+export const SYSTEM_MESSAGE_CONTENT = `Based on the prompt, prepare an array containing the prompt for generating images, the number of images (imageNumber), aspectRatio, and performanceSelection. Each prompt must be translated into English and expanded with as much detail as possible so that a realistic image can be generated based on it. The array should be in only array objects JSON without format. If the user does not provide an aspect ratio, performanceSelection, or the number of images, set aspectRatio to 1920*1920, performanceSelection to Extreme Speed, and imageNumber to 4. Please ensure prompts are as detailed and accurate as possible. If the user provides a number of images greater than 1, prepare a different prompt for each image.`;
 export const USER_MESSAGE_CONTENT = (
   inputText,
   imageNumber = 1,
