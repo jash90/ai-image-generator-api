@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function GenerationQueueDisplay({ queue }) {
   return (
@@ -15,5 +16,15 @@ function GenerationQueueDisplay({ queue }) {
     </div>
   );
 }
+
+GenerationQueueDisplay.propTypes = {
+  queue: PropTypes.arrayOf(
+    PropTypes.shape({
+      prompt: PropTypes.string.isRequired,
+      imageNumber: PropTypes.number.isRequired,
+      aspectRatio: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default GenerationQueueDisplay;

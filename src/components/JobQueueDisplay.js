@@ -28,7 +28,7 @@ function JobQueueDisplay() {
       <button onClick={fetchJobData}>Refresh</button>
       <h2>Job Queue</h2>
       <ul>
-        {jobQueue.map(job => (
+        {jobQueue.map((job) => (
           <li key={job.job_id}>
             Job ID: {job.job_id} -{" "}
             {job.is_finished ? "Finished" : "In Progress"}
@@ -37,7 +37,7 @@ function JobQueueDisplay() {
       </ul>
       <h2>Job History</h2>
       <ul>
-        {jobHistory.map(job => (
+        {jobHistory.map((job) => (
           <li key={job.job_id}>
             Job ID: {job.job_id} -{" "}
             {job.is_finished ? "Finished" : "In Progress"}

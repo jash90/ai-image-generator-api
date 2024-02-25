@@ -70,14 +70,14 @@ function ImageGenerator() {
             requestData,
           );
           if (response.data && Array.isArray(response.data)) {
-            const newUrls = response.data.map(item => item.url);
-            setImageUrls(prevUrls => [...prevUrls, ...newUrls]);
+            const newUrls = response.data.map((item) => item.url);
+            setImageUrls((prevUrls) => [...prevUrls, ...newUrls]);
           }
         } catch (error) {
           console.error("Error processing request:", error);
         }
 
-        setQueue(prevQueue => prevQueue.slice(1));
+        setQueue((prevQueue) => prevQueue.slice(1));
         setIsProcessing(false);
       }
     };
@@ -85,14 +85,14 @@ function ImageGenerator() {
     processQueue();
   }, [queue, isProcessing, performanceSelection, aspectRatio]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const newRequest = {
       prompt: inputText,
       imageNumber,
       aspectRatio, // Confirm this matches the expected "aspectRatio" state format
     };
-    setQueue(prevQueue => [...prevQueue, newRequest]);
+    setQueue((prevQueue) => [...prevQueue, newRequest]);
   };
 
   return (
@@ -101,13 +101,13 @@ function ImageGenerator() {
         <input
           type="text"
           value={inputText}
-          onChange={e => setInputText(e.target.value)}
+          onChange={(e) => setInputText(e.target.value)}
           placeholder="Enter text"
         />
         <input
           type="number"
           value={imageNumber}
-          onChange={e =>
+          onChange={(e) =>
             setImageNumber(Math.min(Math.max(1, Number(e.target.value)), 32))
           }
           min="1"

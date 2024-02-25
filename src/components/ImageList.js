@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ImageList({ imageUrls }) {
   return (
@@ -14,5 +15,9 @@ function ImageList({ imageUrls }) {
     </div>
   );
 }
+
+ImageList.propTypes = {
+  imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default ImageList;

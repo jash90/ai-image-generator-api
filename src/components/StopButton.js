@@ -2,7 +2,7 @@ import React from "react";
 import localApi from "../utils/localApi";
 
 function StopButton() {
-  const handleStop = async event => {
+  const handleStop = async (event) => {
     event.preventDefault();
     try {
       // Directly using the endpoint URL in the axios.post call
