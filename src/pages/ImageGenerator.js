@@ -136,7 +136,7 @@ function ImageGenerator() {
       let response = await sendMessageToOpenAI();
       // Process the response as needed
       response = response.map((promptObject) => {
-        return { ...promptObject, imageNumber: 2 };
+        return { ...promptObject, imageNumber: 2, performanceSelection };
       });
       setQueue((prevQueue) => [...prevQueue, ...response]);
     } catch (error) {
