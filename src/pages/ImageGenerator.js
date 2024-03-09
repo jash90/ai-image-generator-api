@@ -77,7 +77,12 @@ function ImageGenerator() {
             requestData,
           );
           if (response.data && Array.isArray(response.data)) {
-            const newUrls = response.data.map((item) => item.url);
+            const newUrls = response.data.map((item) =>
+              item.url.replace(
+                "http://127.0.0.1:8888",
+                process.env.REACT_APP_API_BASE_URL,
+              ),
+            );
             setImageUrls((prevUrls) => [...prevUrls, ...newUrls]);
           }
         } catch (error) {
