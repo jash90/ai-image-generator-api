@@ -44,3 +44,28 @@ export const USER_MESSAGE_CONTENT = (
   performanceSelection = "Extreme Speed",
 ) =>
   `${inputText}. If I did not specify the number of images, aspect ratio, and performance selection, use these: imageNumber = ${imageNumber}, aspectRatio = ${aspectRatio}, performanceSelection = ${performanceSelection}.`;
+
+export const GENERATE_IMAGE_FROM_TEXT_REQUEST_DATA = {
+  prompt: "test",
+  negative_prompt: "",
+  style_selections: ["Fooocus V2", "Fooocus Enhance", "Fooocus Sharp"],
+  performance_selection: "Speed",
+  aspect_ratios_selection: "1920*1080",
+  image_number: 1,
+  image_seed: -1,
+  sharpness: 2,
+  guidance_scale: 4,
+  base_model_name: "juggernautXL_version6Rundiffusion.safetensors",
+  refiner_model_name: "None",
+  refiner_switch: 0.5,
+  loras: [
+    {
+      model_name: "sd_xl_offset_example-lora_1.0.safetensors",
+      weight: 0.1,
+    },
+  ],
+  advanced_params: ADVANCED_PARAMS,
+  require_base64: false,
+  async_process: false,
+  webhook_url: "",
+};

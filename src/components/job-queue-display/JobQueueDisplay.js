@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import localApi from "../utils/localApi";
+import { Button } from "@mui/material";
+import { localApi } from "../../utils";
 
-function JobQueueDisplay() {
+export const JobQueueDisplay = () => {
   const [jobQueue, setJobQueue] = useState([]);
   const [jobHistory, setJobHistory] = useState([]);
 
@@ -25,7 +26,9 @@ function JobQueueDisplay() {
 
   return (
     <div>
-      <button onClick={fetchJobData}>Refresh</button>
+      <Button color="success" variant="contained" onClick={fetchJobData}>
+        Refresh
+      </Button>
       <h2>Job Queue</h2>
       <ul>
         {jobQueue.map((job) => (
@@ -46,6 +49,6 @@ function JobQueueDisplay() {
       </ul>
     </div>
   );
-}
+};
 
-export default JobQueueDisplay;
+JobQueueDisplay.displayName = "JobQueueDisplay";

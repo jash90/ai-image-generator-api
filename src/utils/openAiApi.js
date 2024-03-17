@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const openAiApi = axios.create({
+export const openAiApi = axios.create({
   baseURL: "https://api.openai.com/v1/",
   timeout: 10000,
   headers: {
@@ -9,5 +9,3 @@ const openAiApi = axios.create({
     "OpenAI-Organization": process.env.REACT_APP_ORGANIZATION_ID,
   },
 });
-
-export default openAiApi;

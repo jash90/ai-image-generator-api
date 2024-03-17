@@ -1,7 +1,8 @@
 import React from "react";
-import localApi from "../utils/localApi";
+import { Button } from "@mui/material";
+import { localApi } from "../../utils";
 
-function StopButton() {
+export const StopButton = () => {
   const handleStop = async (event) => {
     event.preventDefault();
     try {
@@ -13,7 +14,11 @@ function StopButton() {
     }
   };
 
-  return <button onClick={handleStop}>Stop</button>;
-}
+  return (
+    <Button variant="contained" color="error" onClick={handleStop}>
+      Stop
+    </Button>
+  );
+};
 
-export default StopButton;
+StopButton.displayName = "StopButton";
